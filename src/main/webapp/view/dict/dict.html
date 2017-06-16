@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>字典</title> 
+<% include("/view/meta.html"){} %>
+<% include("/view/include.html"){} %>
+</head>
+<body class="easyui-layout">
+	<div id="layoutNorth" region="north" title="快速查询" split="true">
+		<#query id="queryForm"/>
+	</div>
+	<div data-options="region:'center'"
+		data-options="fit:true,border:false">
+		<table id="bg" class="easyui-datagrid" title="字典数据列表"
+			data-options="rownumbers:true,singleSelect:true,pagination:true,url:'../dict/getAllDict',method:'get',toolbar:toolbar">
+			<thead>
+				<tr>
+					<th data-options="field:'id',width:80,align:'center'">字典编号</th>
+					<th data-options="field:'value',width:100,align:'center'">字典值</th>
+					<th data-options="field:'name',width:80,align:'center'">字典名称</th>
+					<th data-options="field:'type',width:80,align:'center'">字典类型</th>
+					<th data-options="field:'subType',width:240,align:'center'">字典子类型</th>
+				</tr>
+			</thead>
+		</table>
+		<script type="text/javascript">
+			var toolbar = [ {
+				text : '新增',
+				iconCls : 'icon-add',
+				handler : function() {
+					alert('add')
+				}
+			}, {
+				text : '修改',
+				iconCls : 'icon-update',
+				handler : function() {
+					alert('cut')
+				}
+			}, '-', {
+				text : '删除',
+				iconCls : 'icon-cut',
+				handler : function() {
+					alert('save')
+				}
+			} ];
+			$(function(){
+				//var pager = $('#dg').datagrid().datagrid('getPager');	// get the pager of datagrid
+				//pager.pagination();			
+			})
+		</script>
+	</div>
+</body>
+</html>

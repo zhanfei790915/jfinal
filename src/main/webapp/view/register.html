@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>用户注册</title> 
+<% include("/view/meta.html"){} %>
+<% include("/view/include.html"){} %>
+</head>
+<body>
+	<div style="margin: 20px 0;"></div>
+	<div class="easyui-panel" title="用户注册"
+		style="width: 100%; max-width: 400px; padding: 30px 60px;">
+		<form id="ff" method="post">
+			<div style="margin-bottom: 20px">
+				<input id="loginid" name="loginid" class="easyui-textbox"
+					prompt="用户名" iconWidth="40"
+					style="width: 100%; padding: 10px;"
+					data-options="label:'用户名：',required:true,labelPosition:'top'">
+			</div>
+			<div style="margin-bottom: 20px">
+				<input id="loginpwd" name="loginpwd" class="easyui-passwordbox"
+					prompt="密码" iconWidth="40"
+					style="width: 100%; padding: 10px"
+					data-options="label:'密码：',required:true,labelPosition:'top'">
+			</div>
+			<div style="margin-bottom: 20px">
+				<input id="regOrg" name="regOrg" class="easyui-combotree" data-options="label:'所属单位:',labelPosition:'top'" style="width:100%">
+			</div>
+		</form>
+		<div style="text-align: center; padding: 5px 0">
+			<a href="javascript:void(0)" class="easyui-linkbutton"
+				onclick="submitForm()" style="width: 80px">注册</a> <a
+				href="javascript:void(0)" class="easyui-linkbutton"
+				onclick="loginForm()" style="width: 80px">登陆</a>
+		</div>
+		<div style="text-align: left; margin-left: 80px; margin-bottom: 5px; color: #BE1302;">
+			<b>${msg!}<b>
+		</div>
+	</div>
+	<script>
+		//注册操作
+		function submitForm() {
+			ff.action = "/regist";
+			ff.submit();
+		}
+		//到登陆界面
+		function loginForm() {
+			ff.action = "/toLogin";
+			ff.submit();
+		}
+		$(document).ready(function() {
+			$('#regOrg').combotree({    
+			    url: '/org/getAllOrgTree',    
+			    required: true   
+			});
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<div id="header">
+	<div class="headerNav">
+		<a class="logo" href="#">LOGO</a>
+		<ul class="nav">
+			<li style="color: #b9ccda;">欢迎[${user.loginID}]</li>
+			<li id="modifyPwd"><a href="javascript:void(0)"
+				onclick="updatePwd();">修改密码</a>
+			</li>
+			<li>
+				<form id="ff" method="post">
+					<a href="javascript:void(0)" onclick="doLogout();">注销</a>
+				</form>
+			</li>
+			<li>
+				<div style="margin-bottom:20px">
+					<input class="easyui-combobox" name="language" style="width:100%" data-options="
+						url:'../view/stylesset.json',
+						method:'get',
+						valueField:'id',
+						textField:'text',
+						onSelect: function(rec){
+							document.cookie='styleid='+rec.id;
+							location.reload();
+            			}
+            		">
+				</div>
+			</li>
+		</ul>
+	</div>
+</div>
+<script type="text/javascript">
+	var updatePwd = function() {
+		var dialog1 = $("#forDailog").dialog({
+			title : '修改密码',
+			width : 400,
+			height : 260,
+			closed : false,
+			cache : false,
+			href : '/toUpdatePwd',
+			modal : true
+		});
+	};
+	var doLogout = function() {
+		$.messager.confirm('确认对话框', '您想要注销该用户吗？', function(r) {
+			if (r) {
+				ff.action = "/doLogout";
+				ff.submit();
+			}
+		});
+	};
+</script>

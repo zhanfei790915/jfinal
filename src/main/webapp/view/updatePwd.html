@@ -1,0 +1,70 @@
+<script type="text/javascript">
+	/*
+	 var submitNow = function($dialog, $parent) {
+	 var url = "/updatePwd";
+	 $.post(url, sy.serializeObject($('#updatePwd')), function(result) {
+	 console.log(result);
+	 if (result.success) {
+	 $.slideMsg("修改密码成功！", $parent);
+	 $dialog.dialog('destroy');
+	 } else {
+	 $parent.messager.alert('提示', result.msg, 'error');
+	 }
+	 }, 'json');
+	 };
+	 var submitForm = function($dialog, $pjq) {
+	 if ($('#updatePwd').form('validate')) {
+	 submitNow($dialog, $pjq);
+	 }
+	 };
+	 */
+	$.extend($.fn.validatebox.defaults.rules, {
+		confirmPass : {
+			validator : function(value, param) {
+				var pass = $(param[0]).passwordbox('getValue');
+				return value == pass;
+			},
+			message : '确认密码与新密码不符.'
+		},
+		vaildataPass : {
+			validator : function(value, param) {
+				var pass = $(param[0]).passwordbox('getValue');
+				return value == pass;
+			},
+			message : '旧密码不正确.'
+		}
+		
+	});
+	function updatePwdSubmit() {
+		$("#updatePwd").submit();
+	};
+</script>
+<div class="easyui-panel"
+	style="width: 100%; height: 100%; padding: 15px 15px">
+	<form id="updatePwd" method="post" action="/updatePwd">
+		<div style="margin-bottom: 10px">
+			<input id="loginPwd" name="loginPwd" type="hidden" class="easyui-passwordbox" value="${user.password}">
+			<input id="oldPwd" name="oldPwd" class="easyui-passwordbox"
+				prompt="旧密码：" iconWidth="28" validType="vaildataPass['#loginPwd']"
+				style="width: 100%; height: 34px; padding: 10px;"
+				data-options="required:true">
+		</div>
+		<div style="margin-bottom: 10px">
+			<input id="password" name="password" class="easyui-passwordbox"
+				prompt="新密码：" iconWidth="28"
+				style="width: 100%; height: 34px; padding: 10px"
+				data-options="required:true">
+		</div>
+		<div style="margin-bottom: 10px">
+			<input id="confimPwd" name="confimPwd" class="easyui-passwordbox"
+				prompt="确认新密码：" iconWidth="28" validType="confirmPass['#password']"
+				style="width: 100%; height: 34px; padding: 10px"
+				data-options="required:true">
+		</div>
+	</form>
+	<div style="text-align: center; padding: 10px 0">
+		<a id="submitbtn" href="javascript:void(0)"
+			onclick="updatePwdSubmit()" class="easyui-linkbutton"
+			style="width: 50%">确定</a>
+	</div>
+</div>
